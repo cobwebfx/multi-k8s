@@ -1,16 +1,16 @@
-docker build -t stephengrider/multi-client:latest -t stephengrider/multi-client:$SHA -f ./client/Dockerfile ./client
-docker build -t stephengrider/multi-server:latest -t stephengrider/multi-server:$SHA -f ./server/Dockerfile ./server
-docker build -t stephengrider/multi-worker:latest -t stephengrider/multi-worker:$SHA -f ./worker/Dockerfile ./worker
+docker build -t cobwebfx/multi-docker-client:latest -t cobwebfx/multi-docker-client:$SHA -f ./client/Dockerfile ./client
+docker build -t cobwebfx/multi-docker-server:latest -t cobwebfx/multi-docker-server:$SHA -f ./server/Dockerfile ./server
+docker build -t cobwebfx/multi-docker-worker:latest -t cobwebfx/multi-docker-worker:$SHA -f ./worker/Dockerfile ./worker
 
-docker push stephengrider/multi-client:latest
-docker push stephengrider/multi-server:latest
-docker push stephengrider/multi-worker:latest
+docker push cobwebfx/multi-docker-client:latest
+docker push cobwebfx/multi-docker-server:latest
+docker push cobwebfx/multi-docker-worker:latest
 
-docker push stephengrider/multi-client:$SHA
-docker push stephengrider/multi-server:$SHA
-docker push stephengrider/multi-worker:$SHA
+docker push cobwebfx/multi-docker-client:$SHA
+docker push cobwebfx/multi-docker-server:$SHA
+docker push cobwebfx/multi-docker-worker:$SHA
 
 kubectl apply -f k8s
-kubectl set image deployments/server-deployment server=stephengrider/multi-server:$SHA
-kubectl set image deployments/client-deployment client=stephengrider/multi-client:$SHA
-kubectl set image deployments/worker-deployment worker=stephengrider/multi-worker:$SHA
+kubectl set image deployments/server-deployment server=cobwebfx/multi-docker-server:$SHA
+kubectl set image deployments/client-deployment client=cobwebfx/multi-docker-client:$SHA
+kubectl set image deployments/worker-deployment worker=cobwebfx/multi-docker-worker:$SHA
